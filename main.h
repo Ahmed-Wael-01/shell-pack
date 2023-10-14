@@ -11,5 +11,6 @@
 char **splice(char *str);
 int word_len(char *str);
 int word_cnt(char *str);
+char *_getenv(const char *name);
 
 #endif
