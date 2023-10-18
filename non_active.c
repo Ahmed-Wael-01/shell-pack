@@ -7,7 +7,7 @@ void non_inter(void)
 	char **argv;
 	char **lines;
 	int id;
-	int i = 0, j = 0;
+	int i = 0,
 
 	bytes = read(STDIN_FILENO, buf, 6143);
 	if (bytes == 0)
