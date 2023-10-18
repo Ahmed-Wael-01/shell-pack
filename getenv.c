@@ -5,7 +5,7 @@ char *_getenv(const char *name)
 	int i = 0, j = 0;
 	int nlen = 0;
 	int elen = 0;
-	char **env = __environ;
+	char **env = environ;
 
 	while (name[i] != '\0')
 		nlen++, i++;

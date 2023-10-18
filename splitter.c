@@ -1,5 +1,47 @@
 #include "main.h"
 
+int line_len(char *str)
+{
+	int i;
+	int count = 0;
+
+	for (i = 0; str[i] != '\n' && str[i] != '\0'; i++)
+		count++;
+	return (count);
+}
+
+/**
+ * a line splitter
+ * for more than one command
+ */
+
+char **line_breaker(char *str)
+{
+	char **vessel;
+	int i, j, ln = 0;
+
+	i = line_count(str);
+	vessel = malloc(sizeof(str) * i + 1);
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if (str[i] != '\n')
+		{
+			j = line_len(&str[i]);
+			*(vessel + ln) = malloc(sizeof(char) * j + 1);
+			for (j = 0; str[i] != '\0' && str[i] != '\n'; j++)
+			{
+				*(*(vessel + ln) + j) = str[i];
+				i++;
+			}
+			*(*(vessel + ln) + j) = '\0';
+			i--, ln++;
+		}
+	}
+	*(vessel + ln) = NULL;
+	return (vessel);
+}
+
+
 /**
  * a word counter
  * to help the splitter
@@ -46,7 +88,10 @@ char **splice(char *str)
 {
 	int i, j, wn = 0;
 	char **vessel;
+
 	i = word_cnt(str);
+	if (i == 0 || str[0] == '\n')
+		return (NULL);
 	vessel = malloc(sizeof(str) * i + 1);
 	for (i = 0; str[i] != '\0' && str[i] != '\n'; i++)
 	{
